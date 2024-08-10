@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_URL, NEYNAR_API_KEY, REDIS_URL } from '../config';
 
 const redisUrl = REDIS_URL || 'redis://localhost:6379';
-const redis = new Redis(redisUrl) // + '?family=0');
+const redis = new Redis(redisUrl + '?family=0') // + '?family=0');
 
 // Function to mark a cast as replied
 async function markCastAsReplied(castId: string, expirationInSeconds: number = 86400) {

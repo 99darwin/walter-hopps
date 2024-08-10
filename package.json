@@ -1,12 +1,12 @@
 {
   "name": "shelf-bot",
   "version": "1.0.0",
-  "description": "A bot that will cast a 'gm 🪐' message in Warpcast at scheduled time everyday (As long as system is online)",
+  "description": "Automated curation",
   "main": "./dist/app.js",
   "scripts": {
     "watch": "tsc --watch",
     "build": "rm -rf dist && tsc",
-    "start": "npm run build && node node_modules/.bin/pm2 start --no-daemon ecosystem.config.cjs --watch",
+    "start": "npm run build && node node_modules/.bin/pm2 start --no-daemon ecosystem.config.cjs",
     "get-approved-signer": "ts-node getApprovedSigner.ts"
   },
   "author": "99darwin",
