@@ -5,7 +5,7 @@ import {
   NEYNAR_API_KEY,
 } from "./config";
 import { isApiErrorResponse } from "@neynar/nodejs-sdk";
-import { getMediaCasts, castToChannel } from './api';
+import { getMediaCasts, markCastAsReplied, castToChannel } from './api';
 import { ReactionType } from "@neynar/nodejs-sdk/build/neynar-api/neynar-v2-api";
 
 const channels = [
@@ -41,6 +41,8 @@ const replyToCast = async (castId: string, author: string, fid: number) => {
     console.log(`Recasted cast ${castId}`);
     await neynarClient.publishCast(SIGNER_UUID, `${messageOptions[Math.floor(Math.random() * messageOptions.length)]} Check it out at /shelf.`, { replyTo: castId });
     console.log(`Replied to cast ${castId}`);
+    await markCastAsReplied(castId);
+    console.log(`Marked cast ${castId} as replied`);
   } catch (err) {
     if (isApiErrorResponse(err)) {
       console.log(err.response.data);
@@ -59,6 +61,6 @@ const checkCasts = async () => {
   });
 }
 // schedule cron job to check for new casts every 5 minutes
-cron.schedule('*/5 * * * *', function() {
+cron.schedule('* * * * *', function() {
   checkCasts();
 });

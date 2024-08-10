@@ -3,10 +3,10 @@ import axios from 'axios';
 import { API_URL, NEYNAR_API_KEY, REDIS_URL } from '../config';
 
 const redisUrl = REDIS_URL || 'redis://localhost:6379';
-const redis = new Redis(redisUrl + '?family=0') // + '?family=0');
+const redis = new Redis(redisUrl + '?family=0');
 
 // Function to mark a cast as replied
-async function markCastAsReplied(castId: string, expirationInSeconds: number = 86400) {
+export async function markCastAsReplied(castId: string, expirationInSeconds: number = 86400) {
   try {
     await redis.setex(`replied:${castId}`, expirationInSeconds, '1');
     console.log(`Marked cast ${castId} as replied`);
@@ -18,8 +18,9 @@ async function markCastAsReplied(castId: string, expirationInSeconds: number = 8
 // Function to check if a cast has been replied to
 async function hasRepliedToCast(castId: string): Promise<boolean> {
   try {
-    const exists = await redis.exists(`replied:${castId}`);
-    return exists === 1;
+    if (!redis) throw new Error('Redis client not initialized');
+    const result = await redis.get(`replied:${castId}`);
+    return result === '1';
   } catch (error) {
     console.error('Error checking if cast has been replied to:', error);
     return false;
@@ -54,7 +55,6 @@ export async function getMediaCasts(limit: number, parentUrls: string[]) {
                     const hasReplied = await hasRepliedToCast(cast.hash);
                     if (!hasReplied) {
                         castArray.push({ hash: cast.hash, author: cast.author.username, fid: cast.author.fid, image: cast.embeds[0].url});
-                        await markCastAsReplied(cast.hash);
                     } else {
                         console.log(`Cast ${cast.hash} has already been replied to. Searching for new casts...`);
                     }
