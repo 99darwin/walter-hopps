@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "tsc --watch",
     "build": "rm -rf dist && tsc",
-    "start": "npm run build && node node_modules/.bin/pm2 start ecosystem.config.cjs",
+    "start": "npm run build && node node_modules/.bin/pm2 start --no-daemon ecosystem.config.cjs --watch",
     "get-approved-signer": "ts-node getApprovedSigner.ts"
   },
   "author": "99darwin",
