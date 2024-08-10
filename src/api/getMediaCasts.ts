@@ -6,7 +6,7 @@ const redisUrl = REDIS_URL || 'redis://localhost:6379';
 const redis = new Redis(redisUrl + '?family=0');
 
 // Function to mark a cast as replied
-export async function markCastAsReplied(castId: string, expirationInSeconds: number = 86400) {
+async function markCastAsReplied(castId: string, expirationInSeconds: number = 86400) {
   try {
     await redis.setex(`replied:${castId}`, expirationInSeconds, '1');
     console.log(`Marked cast ${castId} as replied`);
@@ -49,24 +49,30 @@ export async function getMediaCasts(limit: number, parentUrls: string[]) {
             return castArray;
         }
 
-        castsArray.forEach( async (cast: any) => {
-            if (cast.embeds && cast.embeds[0]?.metadata?.content_type?.includes('image/jpeg' || 'image/png' || 'image/gif')) {
-                if (cast.reactions.likes_count > 10) {
-                    const hasReplied = await hasRepliedToCast(cast.hash);
-                    if (!hasReplied) {
-                        castArray.push({ hash: cast.hash, author: cast.author.username, fid: cast.author.fid, image: cast.embeds[0].url});
-                    } else {
-                        console.log(`Cast ${cast.hash} has already been replied to. Searching for new casts...`);
-                    }
-                }
-            }
-        });
+        for (const cast of castsArray) {
+          if (cast.embeds && cast.embeds[0]?.metadata?.content_type?.includes('image/jpeg') || cast.embeds[0]?.metadata?.content_type?.includes('image/png')) {
+              if (cast.reactions.likes_count > 10) {
+                  const hasReplied = await hasRepliedToCast(cast.hash);
+                  if (!hasReplied) {
+                      castArray.push({ hash: cast.hash, author: cast.author.username, fid: cast.author.fid, image: cast.embeds[0].url});
+                      console.log(`Added new cast ${cast.hash} to reply list`);
+                  } else {
+                      console.log(`Cast ${cast.hash} has already been replied to. Skipping...`);
+                  }
+              }
+          }
+      }
 
     } catch (error) {
         console.error('Error fetching media casts:', error);
     }
-
+    console.log(`Found ${castArray.length} new casts to reply to`);
     return castArray;
+}
+
+export async function markReplySuccess(castHash: string) {
+  await markCastAsReplied(castHash);
+  console.log(`Successfully marked cast ${castHash} as replied`);
 }
 
 
