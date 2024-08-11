@@ -38,8 +38,8 @@ export async function castToChannel(
                     Math.floor(Math.random() * messageOptions.length)
                 ], // Randomly select a message
                 signer_uuid: SIGNER_UUID,
-                parent: hash,
-                parent_author_fid: fid,
+                // parent: hash,
+                // parent_author_fid: fid,
                 idem: randomUUID(),
             }),
         });

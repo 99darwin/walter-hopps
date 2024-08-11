@@ -39,7 +39,7 @@ const replyToCast = async (castId: string, author: string, fid: number) => {
     console.log(`Liked cast ${castId}`);
     await castToChannel('shelf', castId, author, fid)
     console.log(`Recasted cast ${castId}`);
-    await neynarClient.publishCast(SIGNER_UUID, messageOptions[Math.floor(Math.random() * messageOptions.length)], { replyTo: castId });
+    // await neynarClient.publishCast(SIGNER_UUID, messageOptions[Math.floor(Math.random() * messageOptions.length)], { replyTo: castId });
   } catch (err) {
     if (isApiErrorResponse(err)) {
       console.log(err.response.data);
