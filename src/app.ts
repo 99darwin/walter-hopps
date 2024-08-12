@@ -14,6 +14,14 @@ const channels = [
   'https://warpcast.com/~/channel/cryptoart',
   'https://warpcast.com/~/channel/superrare',
   'https://warpcast.com/~/channel/foundation',
+  'https://warpcast.com/~/channel/esoteric',
+  'https://warpcast.com/~/channel/hard',
+  'https://warpcast.com/~/channel/aesthetic',
+  'https://warpcast.com/~/channel/travel',
+  'https://warpcast.com/~/channel/mek',
+  'https://warpcast.com/~/channel/itookaphoto',
+  'https://warpcast.com/~/channel/photography',
+  'https://warpcast.com/~/channel/metaliminal',
 ]
 
 // Validating necessary environment variables or configurations.
