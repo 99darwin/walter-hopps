@@ -65,6 +65,6 @@ cron.schedule('* * * * *', function() {
 });
 
 // schedule cron job to post the vibe frame once every 24 hours, starting immediately
-cron.schedule('0 0 * * *', function() {
+cron.schedule('0 23 * * *', function() {
   castVibeFrame('shelf');
 });
