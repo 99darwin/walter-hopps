@@ -16,6 +16,7 @@ export async function castVibeFrame(
             },
             data: JSON.stringify({
                 embeds: [[{ url: 'https://shelf-vibe-index.vercel.app/api' }]],
+                text: "daily vibe check. you make it in?",
                 channel_id: channel,
                 signer_uuid: SIGNER_UUID,
                 idem: randomUUID(),
