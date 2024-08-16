@@ -7,6 +7,7 @@ import {
 import { isApiErrorResponse } from "@neynar/nodejs-sdk";
 import { getMediaCasts, markReplySuccess, castToChannel } from './api';
 import { ReactionType } from "@neynar/nodejs-sdk/build/neynar-api/neynar-v2-api";
+import { castVibeFrame } from "./api/castVibeFrame";
 
 const channels = [
   'https://warpcast.com/~/channel/art', 
@@ -61,4 +62,9 @@ const checkCasts = async () => {
 // schedule cron job to check for new casts every 5 minutes
 cron.schedule('* * * * *', function() {
   checkCasts();
+});
+
+// schedule cron job to post the vibe frame once every 24 hours, starting immediately
+cron.schedule('0 0 * * *', function() {
+  castVibeFrame('shelf');
 });

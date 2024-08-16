@@ -74,8 +74,3 @@ export async function markReplySuccess(castHash: string) {
   await markCastAsReplied(castHash);
   console.log(`Successfully marked cast ${castHash} as replied`);
 }
-
-
-
-
-
