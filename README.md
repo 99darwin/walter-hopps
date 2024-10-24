@@ -1,8 +1,8 @@
-# gm_bot
+# walter-hopps
 
 ## Introduction
 
-`gm_bot` is an automated messaging bot designed to cast a 'gm 🪐' message in Warpcast every day at a scheduled time. The bot operates continuously as long as the system remains online. It leverages [Neynar API](https://docs.neynar.com/) and is built using [@neynar/nodejs-sdk](https://www.npmjs.com/package/@neynar/nodejs-sdk).
+`walter-hopps` is an automated art curation bot designed to quote cast a the top artwork on Farcaster to the /shelf channel in Warpcast throughout the day at a scheduled time. The bot operates continuously as long as the system remains online. It leverages [Neynar API](https://docs.neynar.com/) and is built using [@neynar/nodejs-sdk](https://www.npmjs.com/package/@neynar/nodejs-sdk).
 
 ## Prerequisites
 
