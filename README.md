@@ -81,9 +81,9 @@ Press "Write" to execute the transaction. This will create a signer for your mne
 
 ## License
 
-`gm_bot` is released under the MIT License. This license permits free use, modification, and distribution of the software, with the requirement that the original copyright and license notice are included in any substantial portion of the work.
+`walter-hopps` is released under the MIT License. This license permits free use, modification, and distribution of the software, with the requirement that the original copyright and license notice are included in any substantial portion of the work.
 
 ## FAQs/Troubleshooting
 
-- **Q1**: What if `gm_bot` stops sending messages?
+- **Q1**: What if `walter-hopps` stops sending messages?
   - **A1**: Check the PM2 logs for any errors and ensure your system's time settings align with the specified `TIME_ZONE`, also ensure that the process is running.
